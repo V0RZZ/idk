@@ -1,0 +1,292 @@
+if game.CoreGui:FindFirstChild("Library") then
+    game.CoreGui["Library"]:Destroy()
+end
+
+
+--GLOBAL VARIABLES
+local LocalPlayer = game.Players.LocalPlayer
+local Workspace = game.Workspace
+local ReplicatedStorage = game.ReplicatedStorage
+
+--LIFTING SIMULATOR STUFF
+
+--LIFTING SIMULATOR VALUES
+getgenv().autolift = false
+getgenv().autosell = false
+
+
+--AUTOLIFT
+function lift()
+    spawn(function()
+        while wait() do
+            for _,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if v:FindFirstChild("Income_Tool_LocalScript") then
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                    break
+                end
+            end
+            if not getgenv().autolift then break end
+            local args = {
+            [1] = {
+            [1] = "GainMuscle"
+            }
+            }
+            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+        end
+    end)
+end
+
+--AUTOSELL
+function sell()
+    spawn(function()
+        while wait() do
+            if not getgenv().autosell then break end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1,1,1)
+            wait(0.1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").EffectStorage.Mark01.Detector.CFrame
+        end
+    end)
+end
+
+--OPEN SHOP
+function openshop()
+    game:GetService("Players").LocalPlayer.PlayerGui["Main_Gui"]["UpgradeMenu_Frame"].Visible = true
+end
+
+--LIFTING SIMULATOR
+if game.placeId == 3652625463 then
+    local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+    local Hub = VLib:Window("WEARESPEDS", "Lifting Simulator", "WRS")
+
+        local Main = Hub:Tab("Main")
+        
+        Main:Toggle("Auto Lift",function(v)
+            getgenv().autolift = v
+            if v then
+                lift()
+            end
+        end)
+
+        Main:Toggle("Auto Sell",function(v)
+            getgenv().autosell = v
+            if v then
+                sell()
+            end
+        end)
+
+        Main:Button("Open Shop", function(v)
+            openshop()
+        end)
+
+        local LocalPlayer = Hub:Tab("LocalPlayer")
+            LocalPlayer:Slider("Walkspeed",16,240,70,function(v)
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+            end)
+
+            LocalPlayer:Slider("JumpPower",50,1000,70,function(v)
+                game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+            end)
+
+        local Teleports = Hub:Tab("Teleports")
+            
+            Teleports:Button("Teleport to Shop",function(v)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-647.942688, -53.877491, 1782.24475)
+            end)
+
+            Teleports:Button("Teleport to Safezone",function(v)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-634.647156, -53.8774796, 1859.01062)
+            end)
+
+
+--LUCKY BLOCK BATTLEGROUNDS
+elseif game.placeId == 662417684 then
+    local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+    local w = library:CreateWindow("WEARESPEDS")
+        local b = w:CreateFolder("LBB GUI")
+            b:Label("Lucky Block Types",{
+            TextSize = 25;
+            TextColor = Color3.fromRGB(255,255,255);
+            BgColor = Color3.fromRGB(20,20,20);
+            })
+            
+            b:Button("Lucky Block",function(v)
+                game:GetService("ReplicatedStorage").SpawnLuckyBlock:FireServer()
+            end)
+
+            b:Button("Super Block",function(v)
+                game:GetService("ReplicatedStorage").SpawnDiamondBlock:FireServer()
+            end)
+
+            b:Button("Diamond Block",function(v)
+                game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+            end)
+
+            b:Button("Rainbow Block",function(v)
+                game:GetService("ReplicatedStorage").SpawnSuperBlock:FireServer()
+            end)
+
+            b:Button("Galaxy Block",function(v)
+                game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+            end)
+
+            b:Label("IY Admin",{
+                TextSize = 25;
+                TextColor = Color3.fromRGB(255,255,255);
+                BgColor = Color3.fromRGB(20,20,20);
+                })
+
+            b:Button("Infinite Yield",function(v)
+                loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+            end)
+            
+        local b = w:CreateFolder("LocalPlayer")
+            b:Label("Player Mods",{
+                TextSize = 25;
+                TextColor = Color3.fromRGB(255,255,255);
+                BgColor = Color3.fromRGB(20,20,20);
+                })
+
+                b:Slider("Walkspeed",{
+                    min = 16; 
+                    max = 500;
+                    precise = true;
+                },function(v)
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+                end)
+
+                b:Slider("Jumppower",{
+                    min = 50; 
+                    max = 1000;
+                    precise = true;
+                },function(v)
+                    game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+                end)
+
+                b:Label("Other",{
+                    TextSize = 25;
+                    TextColor = Color3.fromRGB(255,255,255);
+                    BgColor = Color3.fromRGB(20,20,20);
+                })
+
+                b:Bind("TP Safe Area",Enum.KeyCode.V,function()
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1947.53662, 287.833221, 336.294495)
+                end)
+
+
+
+--INFECTIOUS SMILE VALUES
+getgenv().autoinfect = false
+getgenv().clickteleport = false
+
+--INFECTIOUS SMILE STUFF
+
+--REMOVE ANTIHACK BRICKS
+game:GetService("Workspace").Map.AntiHack:Destroy()
+for i,v in pairs(game:GetService("Workspace").Map.AntiHack:GetDescandents()) do
+    if v.Name == "Part" then
+        v:Destroy()
+    end
+end
+
+
+--AUTOINFECT
+
+
+--INFECTIOUS SMILE
+elseif game.PlaceId == 5985232436 then
+    local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+    local Hub = VLib:Window("WEARESPEDS", "Infectious Smile", "WRS")
+
+
+        local Main = Hub:Tab("Main")
+
+        Main:Label("Buttons")
+
+        Main:Button("Infect",function(v)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2.88215876, 3.20999932, -46.8575172)
+        end)
+
+        Main:Button("Get Bottle And Bat",function(v)
+            local oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.HumanBase.Vendor.BatCollection.HitBox.CFrame
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.HumanBase.Vendor.BottleCollection.HitBox.CFrame
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
+        end)
+
+
+        Main:Button("Remove Infect Pads",function(v)
+            game:GetService("Workspace").Map.Infectors:Destroy()
+            for i,v in pairs(game.Workspace.Map.Infectors:GetDescandents()) do
+                if v.Name == "Infectors" then
+                    v:Destroy()
+                end
+            end
+        end)
+
+        Main:Button("Remove Kill Bricks",function(v)
+            game:GetService("Workspace").Map.KillBricks:Destroy()
+            for i,v in pairs(game.Workspace.Map.KillBricks:GetDescandents()) do
+                if v.ClassName == "Model" then
+                    v:Destroy()
+                    wait()
+                    for i,v in pairs(game:GetService("Workspace").Map.System:GetDescandents()) do
+                        if v.Name == "Lava" then
+                            v:Destroy()
+                        end
+                    end
+                end
+            end
+        end)
+
+        Main:Button("Remove Homebase Doors",function(v)
+            game:GetService("Workspace").Map.HumanBase.HitBoxes:Destroy()
+            for i,v in pairs(game:GetService("Workspace").Map.HumanBase.HitBoxes:GetDescandents()) do
+                if v.Name == "Hitbox" then
+                    v:Destroy()
+                end
+            end
+        end)
+
+        
+        local LocalPlayer = Hub:Tab("LocalPlayer")
+
+        LocalPlayer:Button("Infinite Yield",function(v)
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        end)
+        
+        LocalPlayer:Slider("Walkspeed",16,240,70,function(v)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+        end)
+
+        LocalPlayer:Slider("JumpPower",50,1000,70,function(v)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+        end)
+
+        LocalPlayer:Button("Click Teleport",function(v)
+            local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+            mouse.Button1Down:Connect(function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(mouse.hit.p.X, mouse.hit.p.Y, mouse.hit.p.Z)
+        end)
+    end)
+        
+        local Teleports = Hub:Tab("Teleports")
+
+            Teleports:Button("Emergency Area",function(v)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-12.4007273, 3.25001454, -36.7020874)
+            end)
+
+            Teleports:Button("Player Spawn",function(v)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.636937201, 3.25001454, -3.6007843)
+            end)
+
+            Teleport:Button("Spear Cannon",function(v)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-303.870331, 11.9999971, -48.5189896)
+            
+        local Misc = Hub:Tab("Misc")
+            
+            Misc:Button("Ragdoll", function(v)
+                game:GetService("Players").LocalPlayer.Character.Ragdoll.Ragdoll:FireServer()
+            end)
+        end
