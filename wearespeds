@@ -281,12 +281,13 @@ elseif game.PlaceId == 5985232436 then
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.636937201, 3.25001454, -3.6007843)
             end)
 
-            Teleport:Button("Spear Cannon",function(v)
+            Teleports:Button("Spear Cannon",function(v)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-303.870331, 11.9999971, -48.5189896)
+            end)
             
         local Misc = Hub:Tab("Misc")
             
-            Misc:Button("Ragdoll", function(v)
+            Misc:Button("Ragdoll",function(v)
                 game:GetService("Players").LocalPlayer.Character.Ragdoll.Ragdoll:FireServer()
             end)
         end
