@@ -290,4 +290,78 @@ elseif game.PlaceId == 5985232436 then
             Misc:Button("Ragdoll",function(v)
                 game:GetService("Players").LocalPlayer.Character.Ragdoll.Ragdoll:FireServer()
             end)
+
+
+--RED LIGHT GREEN LIGHT STUFF
+
+--RED LIGHT GREEN LIGHT VALUES
+getgenv().autopull = false
+
+--AUTOPULL
+function pull()
+    spawn(function()
+        while wait() do
+            if not getgenv().autopull then break end
+            local args = {
+                [1] = 0.99999999999999
+            }
+            
+            game:GetService("ReplicatedStorage").Pull:FireServer(unpack(args))
         end
+    end)
+end
+
+
+--RED LIGHT GREEN LIGHT
+elseif game.placeId == 7577073048 then
+    local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+    local Hub = VLib:Window("WEARESPEDS", "Squid game ig", "WRS")
+
+        local Main = Hub:Tab("Main")
+
+            Main:Button("Infinite Yield",function(v)
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+            end)
+
+            Main:Button("Pull Rope",function(v)
+                local args = {
+                    [1] = 0.99999999999999
+                }
+                
+                game:GetService("ReplicatedStorage").Pull:FireServer(unpack(args))
+            end)
+
+            Main:Button("Cut Cookie",function(v)
+                local args = {
+                    [1] = true
+                }
+                
+                game:GetService("ReplicatedStorage").Remotes.HoneyCombResult:FireServer(unpack(args))
+            end)
+
+        local LocalPlayer = Hub:Tab("LocalPlayer")
+
+            LocalPlayer:Slider("WalkSpeed",16,240,70,function(v)
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+            end)
+
+            LocalPlayer:Slider("JumpPower",16,240,70,function(v)
+                game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+            end)
+
+        local Teleports = Hub:Tab("Teleports")
+
+            Teleports:Button("Red Light Green Light End Line",function(v)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-350.037231, 3, 431.593353, -0.999853313, -8.40064232e-08, -0.0171279591, -8.34832434e-08, 1, -3.126015e-08, 0.0171279591, -2.98256673e-08, -0.999853313)
+            end)
+        end
+    
+
+--UNIVERSAL STUFF
+
+
+--UNIVERSAL VALUES
+
+
+--UNIVERSAL
+
