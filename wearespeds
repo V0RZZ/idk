@@ -351,17 +351,57 @@ elseif game.placeId == 7577073048 then
 
         local Teleports = Hub:Tab("Teleports")
 
-            Teleports:Button("Red Light Green Light End Line",function(v)
+            Teleports:Button("Red Light Green Light end Line",function(v)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-350.037231, 3, 431.593353, -0.999853313, -8.40064232e-08, -0.0171279591, -8.34832434e-08, 1, -3.126015e-08, 0.0171279591, -2.98256673e-08, -0.999853313)
             end)
-        end
     
 
---UNIVERSAL STUFF
+
+--KICK OFF STUFF
 
 
---UNIVERSAL VALUES
+--KICK OFF VALUES
+getgenv().autotroll = false
 
+--KICK OFF
+elseif game.placeId == 318978013 then
+    local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+    local Hub = VLib:Window("WEARESPEDS", "Kick Off", "WRS")
 
---UNIVERSAL
+        local Main = Hub:Tab("Main")
+            
+            Main:Button("Score Goal",function(v)
+                game.Workspace.SoccerBall.Position = game.Players.LocalPlayer.Character["Head"].Position
+                wait()
+                game.Workspace.MapHolder:GetChildren()[1].BlueGoal.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                game.Workspace.MapHolder:GetChildren()[1].RedGoal.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                end)
 
+            Main:Button("Ball Troll",function(v)
+                local args = {
+                    [1] = "Kick",
+                    [2] = "Trickshot",
+                    [3] = workspace.SoccerBall,
+                    [4] = 86.743817138672,
+                    [5] = Vector3.new(-35.600109100342, 82.80297088623, 61.198589324951),
+                    [6] = Vector3.new(79.128227233887, -86.816467285156, -370.41516113281),
+                    [7] = Vector3.new(52.648448944092, -119.81646728516, -324.89495849609)
+                }
+
+                game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+            end)
+
+            Main:Button("Get Ball",function(v)
+                game.Workspace.SoccerBall.Position = game.Players.LocalPlayer.Character["Right Leg"].Position
+            end)
+
+            Main:Button("TP to Ball",function(v)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.SoccerBall.CFrame
+            end)
+
+        local LocalPlayer = Hub:Tab("LocalPlayer")
+
+            LocalPlayer:Slider("WalkSpeed",16,24,70,function(v)
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+            end)
+        end
