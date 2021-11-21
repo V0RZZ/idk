@@ -1,0 +1,80 @@
+local lib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local win = lib:CreateWindow("TPS Street Soccer")
+
+local main = win:CreateFolder("Main")
+
+main:Label("Kicks",{
+    TextSize = 25; -- Self Explaining
+    TextColor = Color3.fromRGB(255,255,255);
+    BgColor = Color3.fromRGB(69,69,69);
+    
+}) 
+
+main:Bind("Dribble",Enum.KeyCode.F,function()
+    local args = {
+        [1] = workspace.TPSSystem.TPS,
+        [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        [3] = 30,
+        [4] = Vector3.new(4000000, 300, 4000000)
+    }
+
+    workspace.FE.Actions.KickG1:FireServer(unpack(args))
+end)
+
+main:Bind("Kick",Enum.KeyCode.Z,function()
+    local args = {
+        [1] = workspace.TPSSystem.TPS,
+        [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        [3] = 55,
+        [4] = Vector3.new(4000000, 1000, 4000000)
+    }
+
+    workspace.FE.Actions.KickG1:FireServer(unpack(args))
+end)
+
+main:Bind("High Kick",Enum.KeyCode.R,function()
+    local args = {
+        [1] = workspace.TPSSystem.TPS,
+        [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        [3] = 65,
+        [4] = Vector3.new(4000000, 1100, 4000000)
+    }
+
+    workspace.FE.Actions.KickG1:FireServer(unpack(args))
+end)
+
+main:Bind("Power Kick",Enum.KeyCode.One,function()
+    local args = {
+        [1] = workspace.TPSSystem.TPS,
+        [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        [3] = 65,
+        [4] = Vector3.new(4000000, 1100, 4000000)
+    }
+
+    workspace.FE.Actions.KickP1:FireServer(unpack(args))
+end)
+
+main:Bind("Super Kick",Enum.KeyCode.B,function()
+    local args = {
+        [1] = workspace.TPSSystem.TPS,
+        [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        [3] = 70,
+        [4] = Vector3.new(4000000, 1100, 4000000)
+        }
+        workspace.FE.Actions.KickP1:FireServer(unpack(args))
+end)
+
+local creds = win:CreateFolder("Credits")
+creds:Label("Scripting: F,#0757",{
+    TextSize = 25; -- Self Explaining
+    TextColor = Color3.fromRGB(255,255,255);
+    BgColor = Color3.fromRGB(69,69,69);
+    
+}) 
+creds:Label("UI: Wally UI v3 Remake",{
+    TextSize = 25; -- Self Explaining
+    TextColor = Color3.fromRGB(255,255,255);
+    BgColor = Color3.fromRGB(69,69,69);
+    
+}) 
