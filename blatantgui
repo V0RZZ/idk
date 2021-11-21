@@ -1,0 +1,177 @@
+getgenv().autotpball = false
+getgenv().autotackle = false
+getgenv().autopowerkick = false
+getgenv().autosuperkick = false
+getgenv().autokick = false
+getgenv().autodribble = false
+getgenv().autonormalkick = false
+
+function balltp()
+    spawn(function()
+        while wait() do
+            if not getgenv().autotpball then break end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").TPSSystem.TPS.CFrame
+        end
+    end)
+end
+
+function tackle()
+spawn(function()
+    while wait() do
+        if not getgenv().autotackle then break end
+            local args = {
+            [1] = workspace.TPSSystem.TPS,
+            [2] = game:GetService("Players").LocalPlayer.Character.Head
+        }
+        
+        workspace.FE.Actions.Tackle:FireServer(unpack(args))
+    end
+end)
+end
+
+function kick()
+spawn(function()
+    while wait() do
+        if not getgenv().autokick then break end
+            local args = {
+            [1] = workspace.TPSSystem.TPS,
+            [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+            [3] = 65,
+            [4] = Vector3.new(4000000, 1100, 4000000)
+        }
+
+        workspace.FE.Actions.KickG1:FireServer(unpack(args))
+    end
+end)
+end
+
+
+function powerkick()
+spawn(function()
+    while wait() do
+        if not getgenv().autopowerkick then break end
+            local args = {
+            [1] = workspace.TPSSystem.TPS,
+            [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+            [3] = 65,
+            [4] = Vector3.new(4000000, 1100, 4000000)
+        }
+
+        workspace.FE.Actions.KickP1:FireServer(unpack(args))
+    end
+end)
+end
+
+function superkick()
+spawn(function()
+    while wait() do
+        if not getgenv().autosuperkick then break end
+            local args = {
+            [1] = workspace.TPSSystem.TPS,
+            [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+            [3] = 70,
+            [4] = Vector3.new(4000000, 1100, 4000000)
+            }
+            workspace.FE.Actions.KickP1:FireServer(unpack(args))
+        end
+    end)
+end
+
+function dribble()
+spawn(function()
+    while wait() do
+        if not getgenv().autodribble then break end
+            local args = {
+                [1] = workspace.TPSSystem.TPS,
+                [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+                [3] = 30,
+                [4] = Vector3.new(4000000, 300, 4000000)
+            }
+
+            workspace.FE.Actions.KickG1:FireServer(unpack(args))
+        end
+    end)
+end
+
+function normalkick()
+spawn(function()
+    while wait() do
+        if not getgenv().autonormalkick then break end
+            local args = {
+                [1] = workspace.TPSSystem.TPS,
+                [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+                [3] = 55,
+                [4] = Vector3.new(4000000, 1000, 4000000)
+            }
+
+            workspace.FE.Actions.KickG1:FireServer(unpack(args))
+        end
+    end)
+end
+
+
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+
+local win = VLib:Window("Phantom Hub", "TPS Street Soccer", "TPS")
+
+local main = win:Tab("Main")
+    
+    main:Label("Kicks (OP)")
+
+    main:Toggle("Dribble", function(v)
+        getgenv().autodribble = v
+        if v then
+            dribble()
+        end
+    end)
+    
+    main:Toggle("TackleDribble", function(v)
+        getgenv().autotackle = v
+        if v then
+            tackle()
+        end
+    end)
+
+    main:Toggle("Kick", function(v)
+        getgenv().autonormalkick = v
+        if v then
+            normalkick()
+        end
+    end)
+
+    main:Toggle("HighKick", function(v)
+        getgenv().autokick = v
+        if v then
+            kick()
+        end
+    end)
+
+    main:Toggle("PowerKick", function(v)
+        getgenv().autopowerkick = v
+        if v then
+            powerkick()
+        end
+    end)
+
+    main:Toggle("SuperKick", function(v)
+        getgenv().autosuperkick = v
+        if v then
+            superkick()
+        end
+    end)
+
+local misc = win:Tab("Miscellaneous")
+    misc:Button("TP To ball", function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").TPSSystem.TPS.CFrame
+    end)
+
+    misc:Toggle("Spam tp to ball", function(v)
+        getgenv().autotpball = v
+        if v then
+            balltp()
+        end
+    end)
+
+local creds = win:Tab("Credits")
+    creds:Label("Scripting: F,#0757")
+    creds:Label("UI: Vep RGB ui library")
