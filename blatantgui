@@ -1,3 +1,10 @@
+for i,v in pairs(game:GetService("CoreGui"):GetChildren()) do
+    if v.Name == "Library" then
+        v:Destroy()
+    end
+end
+
+
 getgenv().autotpball = false
 getgenv().autotackle = false
 getgenv().autopowerkick = false
@@ -5,6 +12,10 @@ getgenv().autosuperkick = false
 getgenv().autokick = false
 getgenv().autodribble = false
 getgenv().autonormalkick = false
+getgenv().leftcurve = false
+getgenv().rightcurve = false
+
+
 
 function balltp()
     spawn(function()
@@ -14,6 +25,54 @@ function balltp()
         end
     end)
 end
+
+function curveleft()
+    spawn(function()
+        while wait() do
+            if not getgenv().leftcurve then break end
+            local args = {
+            [1] = workspace.TPSSystem.TPS,
+            [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+            [3] = 65,
+            [4] = Vector3.new(4000000, 1100, 4000000)
+        }
+        
+        workspace.FE.Actions.KickG1:FireServer(unpack(args))
+        
+        local args = {
+            [1] = workspace.TPSSystem.TPS,
+            [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+        }
+        
+        workspace.FE.Actions.KickC2:FireServer(unpack(args))
+        end
+    end)
+end
+
+function curveright()
+    spawn(function()
+        while wait() do
+            if not getgenv().rightcurve then break end
+                local args = {
+                    [1] = workspace.TPSSystem.TPS,
+                    [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+                    [3] = 65,
+                    [4] = Vector3.new(4000000, 1100, 4000000)
+                }
+                
+                workspace.FE.Actions.KickG1:FireServer(unpack(args))
+                
+                local args = {
+                    [1] = workspace.TPSSystem.TPS,
+                    [2] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                }
+                
+                workspace.FE.Actions.KickC1:FireServer(unpack(args))
+            end
+        end)
+    end
+
+
 
 function tackle()
 spawn(function()
@@ -158,6 +217,30 @@ local main = win:Tab("Main")
         if v then
             superkick()
         end
+    end)
+    
+    main:Toggle("LeftCurveKick", function(v)
+        getgenv().leftcurve = v
+        if v then
+            curveleft()
+        end
+    end)
+    
+    main:Toggle("RightCurveKick", function(v)
+        getgenv().rightcurve = v
+        if v then
+            curveright()
+        end
+    end)
+    
+    main:Label("Others")
+    
+    main:Button("Blue Team", function(v)
+        workspace.FE.CTeamColor.RemoteEventB:FireServer()
+    end)
+    
+    main:Button("Red Team", function(v)
+        workspace.FE.PlayerTeam.RemoteEventR:FireServer()
     end)
 
 local misc = win:Tab("Miscellaneous")
